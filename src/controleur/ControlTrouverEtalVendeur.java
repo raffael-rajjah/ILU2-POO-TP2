@@ -12,7 +12,6 @@ public class ControlTrouverEtalVendeur {
 	}
 
 	public Etal trouverEtalVendeur(String nomVendeur) {
-		//TODO a completer
 		Etal etal = null;
 		Gaulois gaulois = village.trouverHabitant(nomVendeur);
 		
