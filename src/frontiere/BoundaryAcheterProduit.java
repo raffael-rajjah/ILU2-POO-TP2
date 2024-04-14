@@ -19,22 +19,43 @@ public class BoundaryAcheterProduit {
 		
 		else {
 			
-			String nomProduit = Clavier.entrerChaine("Quel produit voulez-vous acheter ?");
-			String[] vendeursNom = controlAcheterProduit.trouverVendeurs(nomProduit);
+			String[] vendeursNom;
+			
+			do {
+				String nomProduit = Clavier.entrerChaine("Quel produit voulez-vous acheter ?");
+				vendeursNom = controlAcheterProduit.trouverVendeurs(nomProduit);
+				
+				if(vendeursNom.length <= 0) {
+					System.out.println("Désolé, personne ne vend ce produit au marché.");
+				}
+			}
+			while(vendeursNom.length <= 0);
 			
 			System.out.println("Chez quel commerçant voulez-vous acheter des fleurs ?");
 			for(int i = 0; i < vendeursNom.length; i ++) {
 				System.out.println((i+1) + " - " + vendeursNom[i]);
 			}
 			
-			int  vendeurChoix = Clavier.entrerEntier("");
+			int vendeurChoix;
+			
+			do {
+				vendeurChoix = Clavier.entrerEntier("");
+				
+				if(vendeurChoix > vendeursNom.length) {
+					System.out.println("Choix non valide");
+				}
+				
+				
+			} while (vendeurChoix > vendeursNom.length);
+				
+		
 			
 			System.out.println(nomAcheteur + " se déplace jusqu'à l'étal du vendeur " + vendeursNom[vendeurChoix - 1]);
 			int quantite = Clavier.entrerEntier("Bonjour " + nomAcheteur + "\nCombien de fleurs voulez-vous acheter ?");
 			
-			controlAcheterProduit.acheterProduit(quantite, vendeursNom[vendeurChoix - 1]);
+			String message = controlAcheterProduit.acheterProduit(quantite, vendeursNom[vendeurChoix - 1], nomAcheteur);
 			
-			System.out.println(nomAcheteur + " achète 5 fleurs à " + vendeursNom[vendeurChoix-1]);
+			System.out.println(message);
 		
 		}
 		
